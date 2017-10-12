@@ -1,0 +1,47 @@
+group 'hello'
+version '1.0-SNAPSHOT'
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'application'
+apply plugin: 'org.springframework.boot'
+
+mainClassName = 'hello.HelloApplication'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.linecorp.bot:line-bot-spring-boot:1.5.0'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-logging'
+    compile 'joda-time:joda-time:2.2'
+    compile 'org.projectlombok:lombok:1.16.12'
+    testCompile 'junit:junit:4.11'
+}
+
+jar {
+    baseName = 'gs-gradle'
+    version = '0.1.0'
+}
+
+// used to `bootRun -Dline.bot.channelToken=YOUR_CHANNEL_TOKEN -Dline.bot.channelSecret=YOUR_CHANNEL_SECRET`
+bootRun {
+    systemProperties System.properties
+}
+
